@@ -1,0 +1,24 @@
+name: CD - Staging
+
+on:
+  # Runs when PR is created from release → deployment
+  pull_request:
+    branches:
+      - deployment
+
+  # Runs when PR is merged (push) into deployment
+  push:
+    branches:
+      - deployment
+
+jobs:
+  deploy-to-staging:
+    runs-on: ubuntu-latest
+    environment: staging   # Uses staging environment secrets
+
+    steps:
+      - name: Trigger Render Staging Deployment
+        run: |
+          curl -X POST \
+          https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID_STG }}/deploys \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
