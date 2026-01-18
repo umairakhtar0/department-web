@@ -120,7 +120,7 @@ University-Department-Website/
 ```bash
 git clone https://github.com/umairakhtar0/department-web.git
 npx htmlhint "**/*.html"
-npx stylelint "**/*.css"
+npx stylelint "src/styles/**/*.css"
 ```
 
 ---------------------------------------------------------------------
