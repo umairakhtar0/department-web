@@ -1,8 +1,3 @@
-Ah! I see what you mean from the screenshot — the formatting looks **messy** because everything is running together without proper spacing, headings, or line breaks. The emojis, links, and commands are all on one line, which makes it hard to read.
-
-Here’s how we can **clean it up** for a professional GitHub README:
-
----
 
 # University Computer Science Department Website
 
