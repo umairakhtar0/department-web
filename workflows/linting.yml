@@ -1,3 +1,4 @@
+
 name: linting
 
 on:
@@ -5,28 +6,43 @@ on:
     branches: [develop]
 
 jobs:
-  lint-and-build:
+  html-lint:
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Checkout the code from GitHub
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
-
-      # 2. Set up Node.js environment
-      - name: Setup Node.js
+      
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+      
+      - name: Clean node_modules if exists
+        run: rm -rf node_modules || true
+      
+      - name: Install dependencies
+        run: npm ci  # Clean install from lockfile
+      
+      - name: Run HTMLHint 
+        run: npm run lint:html  # This will definitely work
 
-      # 3. Install dependencies
-      - name: Install Dependencies
-        run: npm install
-
-      # 4. Run HTMLHint
-      - name: Run HTMLHint
-        run: npx htmlhint "**/*.html"
-
-      # 5. Run Stylelint
-      - name: Run Stylelint
-        run: npx stylelint "**/*.css"
+  css-lint:
+    runs-on: ubuntu-latest
+    needs: html-lint
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Clean node_modules if exists
+        run: rm -rf node_modules || true
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run Stylelint on style.css
+        run: npm run lint:css
