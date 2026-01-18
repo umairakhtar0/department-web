@@ -1,5 +1,12 @@
-"scripts": {
-  "build": "parcel build src/*.html --dist-dir dist",
-  "lint:html": "htmlhint \"**/*.html\"",
-  "lint:css": "stylelint \"src/styles/style.css\""
+{
+  "name": "department-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "parcel build",
+    "lint:html": "htmlhint \"**/*.html\""
+  },
+  "devDependencies": {
+    "htmlhint": "^1.1.4"
+  }
 }
