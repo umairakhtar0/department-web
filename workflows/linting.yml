@@ -38,4 +38,4 @@ jobs:
         run: npm install
       
       - name: Run Stylelint on style.css
-        run: npx stylelint styles/style.css
+        run: npx stylelint "src/styles/style.css"
