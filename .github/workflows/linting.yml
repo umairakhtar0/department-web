@@ -1,0 +1,41 @@
+name: linting
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  html-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run HTMLHint 
+        run: npx htmlhint "**/*.html"
+
+  css-lint:
+    runs-on: ubuntu-latest
+    needs: html-lint  # This runs after HTML lint passes
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run Stylelint on style.css
+        run: npx stylelint "src/styles/style.css"
