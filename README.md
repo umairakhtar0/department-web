@@ -1,38 +1,44 @@
-University Computer Science Department Website
+Ah! I see what you mean from the screenshot — the formatting looks **messy** because everything is running together without proper spacing, headings, or line breaks. The emojis, links, and commands are all on one line, which makes it hard to read.
 
-A professional, fully containerized, and automatically deployed departmental website implementing complete DevOps practices, including Git Flow, CI/CD pipelines, Docker containerization, and multi-environment deployment.
+Here’s how we can **clean it up** for a professional GitHub README:
 
-📋 Project Overview
+---
 
-This project demonstrates a complete end-to-end DevOps workflow by building a static website for a Computer Science Department.
+# University Computer Science Department Website
 
-The website is containerized using Docker and automatically deployed to three separate environments:
+A professional, fully containerized, and automatically deployed departmental website implementing complete DevOps practices including **Git Flow, CI/CD pipelines, Docker containerization**, and **multi-environment deployment**.
 
-Development
+---
 
-Staging/QA
+## 📋 Project Overview
 
-Production
+This project demonstrates a complete end-to-end DevOps workflow by building a **static website for a Computer Science Department**.
 
-All deployments are handled using GitHub Actions CI/CD pipelines.
+The website is containerized using **Docker** and automatically deployed to three separate environments:
 
-Key Features
+* **Development**
+* **Staging/QA**
+* **Production**
 
-🎨 Responsive Design: Mobile-friendly, modern UI
+All deployments are handled using **GitHub Actions CI/CD pipelines**.
 
-🐳 Docker Containerization: Optimized multi-stage Dockerfile
+---
 
-🔄 Git Flow Workflow: Proper branching strategy
+## Key Features
 
-🚀 CI/CD Pipelines: Automated testing, building, and deployment
+* **🎨 Responsive Design:** Mobile-friendly, modern UI
+* **🐳 Docker Containerization:** Optimized multi-stage Dockerfile
+* **🔄 Git Flow Workflow:** Proper branching strategy
+* **🚀 CI/CD Pipelines:** Automated testing, building, and deployment
+* **🔒 Secrets Management:** GitHub Environments with protected secrets
+* **📦 Multi-Environment Deployment:** Dev, Staging, and Production
+* **✅ Code Quality:** HTML/CSS linting and validation
 
-🔒 Secrets Management: GitHub Environments with protected secrets
+---
 
-📦 Multi-Environment Deployment: Dev, Staging, and Production
+## 🏗️ Project Structure
 
-✅ Code Quality: HTML/CSS linting and validation
-
-🏗️ Project Structure
+```
 University-Department-Website/
 ├── src/                  # Source files
 │   ├── index.html        # Home page
@@ -51,92 +57,87 @@ University-Department-Website/
 ├── nginx.conf            # Nginx web server config
 ├── .gitignore            # Git ignore rules
 └── README.md             # This file
+```
 
-📄 Web Pages
-Home Page (index.html)
+---
 
-Department overview and mission statement
+## 📄 Web Pages
 
-Key highlights and achievements
+### Home Page (`index.html`)
 
-Quick navigation to other sections
+* Department overview and mission statement
+* Key highlights and achievements
+* Quick navigation to other sections
+* Hero banner with call-to-action
 
-Hero banner with call-to-action
+### Courses Page (`courses.html`)
 
-Courses Page (courses.html)
+* Core, advanced, and elective courses
+* Course descriptions and availability
+* Registration information
+* Prerequisites and credit hours
 
-Core, advanced, and elective courses
+### Faculty Page (`faculty.html`)
 
-Course descriptions and availability
+* Faculty member profiles
+* Specializations and research areas
+* Office hours and contact information
+* Research focus areas
 
-Registration information
+### Admissions Page (`admissions.html`)
 
-Prerequisites and credit hours
+* Bachelor's and Master's programs
+* Admission criteria and requirements
+* Application process timeline
+* Important deadlines
+* Tuition and financial aid information
 
-Faculty Page (faculty.html)
+### Contact Page (`contact.html`)
 
-Faculty member profiles
+* Contact information and office details
+* Contact form
+* Quick links
+* Google Maps integration
+* Office hours
 
-Specializations and research areas
+---
 
-Office hours and contact information
+## 🔄 Git Flow Strategy
 
-Research focus areas
+**Branch Structure:**
 
-Admissions Page (admissions.html)
+* **main:** Production-ready code (Protected)
+* **release/:** Release candidates (e.g., `release/v1.0.0`)
+* **develop:** Development branch (Protected)
+* **feature/:** Feature branches (e.g., `feature/new-page`)
+* **bugfix/:** Bug fix branches (e.g., `bugfix/homepage-styling`)
+* **hotfix/:** Hotfix branches (e.g., `hotfix/critical-bug`)
 
-Bachelor's and Master's programs
+-----------------------------------------------------------------------------
 
-Admission criteria and requirements
+## 🚀 Run Everything Locally
 
-Application process timeline
-
-Important deadlines
-
-Tuition and financial aid information
-
-Contact Page (contact.html)
-
-Contact information and office details
-
-Contact form
-
-Quick links
-
-Google Maps integration
-
-Office hours
-
-🔄 Git Flow Strategy
-
-Branch Structure:
-
-main: Production-ready code (Protected)
-
-release/: Release candidates (e.g., release/v1.0.0)
-
-develop: Development branch (Protected)
-
-feature/: Feature branches (e.g., feature/new-page)
-
-bugfix/: Bug fix branches (e.g., bugfix/homepage-styling)
-
-hotfix/: Hotfix branches (e.g., hotfix/critical-bug)
-
-🚀 Run Everything Locally
+```bash
 git clone https://github.com/umairakhtar0/department-web.git
 npx htmlhint "**/*.html"
-npx stylelint styles/style.css
+npx stylelint "**/*.css"
+```
 
-🟢 Push to GitHub
+---------------------------------------------------------------------
+
+## 🟢 Push to GitHub
+
+```bash
 git add .
 git commit -m "MESSAGE"
 git checkout -b BRANCHNAME
 git add .
 git commit -m "MESSAGES"
-git push origin feature/contact-page
+git push origin branchname
+```
 
+* Make a **Pull Request (PR)** on GitHub to the `develop` branch.
+* GitHub Actions will **run automatically** for linting, building, and deployment.
 
-Make a Pull Request (PR) on GitHub to the develop branch.
+-------------------------------------------------------------------------------------------
 
-GitHub Actions will run automatically for linting, building, and deployment.
