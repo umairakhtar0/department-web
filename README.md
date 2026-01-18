@@ -119,6 +119,7 @@ University-Department-Website/
 
 ```bash
 git clone https://github.com/umairakhtar0/department-web.git
+npm install 
 npx htmlhint "**/*.html"
 npx stylelint "src/styles/**/*.css"
 ```
