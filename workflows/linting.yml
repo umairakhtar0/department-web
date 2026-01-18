@@ -16,14 +16,20 @@ jobs:
         with:
           node-version: '20'
       
-      - name: Clean node_modules if exists
-        run: rm -rf node_modules || true
+      - name: Clean up existing node_modules
+        run: |
+          rm -rf node_modules 2>/dev/null || true
+          rm -f package-lock.json 2>/dev/null || true
       
       - name: Install dependencies
-        run: npm ci  # Clean install from lockfile
+        run: npm install --no-package-lock
       
-      - name: Run HTMLHint 
-        run: npm run lint:html  # This will definitely work
+      - name: Fix permissions and run HTMLHint
+        run: |
+          # Ensure the binary has execute permissions
+          chmod +x node_modules/.bin/htmlhint 2>/dev/null || true
+          # Run using node directly
+          node node_modules/.bin/htmlhint "**/*.html"
 
   css-lint:
     runs-on: ubuntu-latest
@@ -37,11 +43,15 @@ jobs:
         with:
           node-version: '20'
       
-      - name: Clean node_modules if exists
-        run: rm -rf node_modules || true
+      - name: Clean up existing node_modules
+        run: |
+          rm -rf node_modules 2>/dev/null || true
+          rm -f package-lock.json 2>/dev/null || true
       
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-package-lock
       
-      - name: Run Stylelint on style.css
-        run: npm run lint:css
+      - name: Fix permissions and run Stylelint
+        run: |
+          chmod +x node_modules/.bin/stylelint 2>/dev/null || true
+          node node_modules/.bin/stylelint "src/styles/style.css"
