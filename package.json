@@ -1,8 +1,12 @@
 {
-  "name": "stylelint",
+  "name": "department-web",
   "version": "1.0.0",
+  "description": "Departmental website project",
+  "main": "index.js",
   "scripts": {
-    "build": "parcel build src/*.html --dist-dir dist"
+    "build": "parcel build src/*.html --dist-dir dist",
+    "lint:html": "htmlhint \"**/*.html\"",
+    "lint:css": "stylelint \"src/styles/style.css\""
   },
   "devDependencies": {
     "htmlhint": "^1.1.4",
