@@ -1,19 +1,17 @@
 name: CI - Development
 
 on:
-  # Run when a pull request is created targeting the release branch
+  # Trigger when a PR is created targeting the release branch
   pull_request:
     branches:
       - release
-    # Optional: Only trigger if PR is from develop branch
-    # You can enforce with a condition inside the job later if needed
-
-  # Run when code is merged/pushed into the release branch
+  # Trigger when code is merged/pushed into release branch
   push:
     branches:
       - release
 
 jobs:
+  # Step 1: HTML linting
   html-lint:
     runs-on: ubuntu-latest
     steps:
@@ -31,6 +29,7 @@ jobs:
       - name: Run HTMLHint on contact.html
         run: npx htmlhint src/contact.html
 
+  # Step 2: CSS linting (runs after HTML lint passes)
   css-lint:
     runs-on: ubuntu-latest
     needs: html-lint
@@ -49,33 +48,34 @@ jobs:
       - name: Run Stylelint on style.css
         run: npx stylelint styles/style.css
 
- build-and-push:
-  runs-on: ubuntu-latest
-  needs: css-lint
-  environment: development  # ✅ This tells GitHub to use the secrets from the development environment
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  # Step 3: Build and push Docker image (runs after CSS lint passes)
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: css-lint
+    environment: development  # ✅ Use secrets from the development environment
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Install Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build with Parcel
-      run: npm run build
+      - name: Build with Parcel
+        run: npm run build
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    - name: Build Docker image
-      run: docker build -t umairakhtar0/cs-department:dev .
+      - name: Build Docker image
+        run: docker build -t umairakhtar0/cs-department:dev .
 
-    - name: Push Docker image
-      run: docker push umairakhtar0/cs-department:dev
+      - name: Push Docker image
+        run: docker push umairakhtar0/cs-department:dev
